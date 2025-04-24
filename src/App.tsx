@@ -4,8 +4,8 @@ import { airdropAddress, codeHex, dictBase64, entries } from './shared/constants
 import { generateLimitOrderPayload } from './shared/helpers/helpers';
 
 export default function App() {
-  const [tonConnectUi] = useTonConnectUI();
   const myAddress = useTonAddress();
+  const [tonConnectUi] = useTonConnectUI();
   const { address, stateInitBase64, msgBody } = generateLimitOrderPayload({
     airdropAddress: Address.parse(airdropAddress),
     indexFutureOwner: 5n,
@@ -37,7 +37,7 @@ export default function App() {
       <div className='flex h-[300px] w-[300px] flex-col items-center justify-center gap-5 rounded-lg bg-gray-700'>
         <TonConnectButton />
         <p className='text-center text-sm'>Get airdrop by connecting your wallet</p>
-        <button className={`rounded-md p-2 text-white ${buttonColor}`} onClick={claim}>
+        <button className={`rounded-md p-2 text-white ${buttonColor}`} onClick={isAddressInEntries ? claim : undefined}>
           {isAddressInEntries
             ? `Claimed ${entries.find((entry) => entry.address === myAddress)?.amount} Jettons`
             : !myAddress
