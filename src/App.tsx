@@ -38,7 +38,11 @@ export default function App() {
         <TonConnectButton />
         <p className='text-center text-sm'>Get airdrop by connecting your wallet</p>
         <button className={`rounded-md p-2 text-white ${buttonColor}`} onClick={claim}>
-          {isAddressInEntries ? `Claimed ${entries.find((entry) => entry.address === myAddress)?.amount} Jettons` : 'You not claimed'}
+          {isAddressInEntries
+            ? `Claimed ${entries.find((entry) => entry.address === myAddress)?.amount} Jettons`
+            : !myAddress
+              ? 'Connect wallet'
+              : 'You not claimed'}
         </button>
       </div>
     </main>
